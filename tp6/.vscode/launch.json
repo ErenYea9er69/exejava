@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Gestion Etudiants",
+            "request": "launch",
+            "mainClass": "MainApplication",
+            "vmArgs": "--module-path \"d:\\java\\tp fxml\\javafx-sdk\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
