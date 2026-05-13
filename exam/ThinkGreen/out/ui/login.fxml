@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="ui.LoginController"
+           styleClass="login-root" stylesheets="@styles.css"
+           prefWidth="900" prefHeight="620">
+
+    <!-- Login Card -->
+    <VBox styleClass="login-card" alignment="CENTER" spacing="4"
+          StackPane.alignment="CENTER">
+
+        <!-- Leaf Icon -->
+        <Label text="🌿" styleClass="login-leaf-icon" />
+
+        <!-- Title -->
+        <Label text="ThinkGreen" styleClass="login-title" />
+        <Label text="Jardinage Urbain Collaboratif" styleClass="login-subtitle" />
+
+        <!-- Username -->
+        <VBox spacing="4">
+            <padding><Insets top="8"/></padding>
+            <Label text="NOM D'UTILISATEUR" styleClass="form-label" />
+            <TextField fx:id="usernameField" styleClass="form-field"
+                       promptText="Entrez votre nom d'utilisateur" />
+        </VBox>
+
+        <!-- Password -->
+        <VBox spacing="4">
+            <padding><Insets top="10"/></padding>
+            <Label text="MOT DE PASSE" styleClass="form-label" />
+            <PasswordField fx:id="passwordField" styleClass="form-field"
+                           promptText="Entrez votre mot de passe" />
+        </VBox>
+
+        <!-- Error Label -->
+        <Label fx:id="errorLabel" styleClass="error-label" text="" />
+
+        <!-- Login Button -->
+        <VBox spacing="12" alignment="CENTER">
+            <padding><Insets top="20"/></padding>
+            <Button text="Se Connecter" styleClass="btn-primary"
+                    onAction="#handleLogin" maxWidth="1.7976931348623157E308" />
+            <Button text="Créer un compte" styleClass="btn-link"
+                    onAction="#goToRegister" />
+        </VBox>
+    </VBox>
+</StackPane>

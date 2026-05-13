@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.DashboardController"
+      stylesheets="@styles.css" prefWidth="1200" prefHeight="750">
+
+    <!-- ════ SIDEBAR ════ -->
+    <VBox styleClass="sidebar" spacing="0">
+
+        <!-- Brand -->
+        <Label text="🌿 ThinkGreen" styleClass="sidebar-brand" />
+        <Label text="Jardinage Urbain" styleClass="sidebar-tagline" />
+
+        <!-- Divider -->
+        <Region styleClass="sidebar-divider" />
+
+        <!-- Nav Section -->
+        <Label text="NAVIGATION" styleClass="nav-section-label" />
+
+        <Button text="📊  Tableau de Bord" styleClass="nav-btn, nav-btn-active"
+                onAction="#goToDashboard" />
+        <Button text="🌱  Mes Plantes" styleClass="nav-btn"
+                onAction="#goToPlants" />
+        <Button text="👥  Utilisateurs" styleClass="nav-btn"
+                onAction="#goToUsers" />
+        <Button text="⛅  Météo / Alertes" styleClass="nav-btn"
+                onAction="#goToWeather" />
+        <Button text="💧  Planning Arrosage" styleClass="nav-btn"
+                onAction="#goToSchedule" />
+
+        <!-- Spacer -->
+        <Region VBox.vgrow="ALWAYS" />
+
+        <!-- Divider -->
+        <Region styleClass="sidebar-divider" />
+
+        <!-- User info + Logout -->
+        <Label fx:id="userInfoLabel" text="Connecté" styleClass="nav-section-label" />
+        <Button text="🚪  Déconnexion" styleClass="nav-btn, nav-btn-logout"
+                onAction="#handleLogout" />
+
+        <Region prefHeight="15" />
+    </VBox>
+
+    <!-- ════ CONTENT ════ -->
+    <VBox styleClass="content-area" HBox.hgrow="ALWAYS">
+
+        <!-- Page Header -->
+        <VBox styleClass="page-header">
+            <Label text="Tableau de Bord" styleClass="page-title" />
+            <Label fx:id="welcomeLabel" text="Bienvenue sur ThinkGreen" styleClass="page-subtitle" />
+        </VBox>
+
+        <!-- Scrollable Body -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
+            <VBox styleClass="page-body" spacing="24">
+
+                <!-- ── STAT CARDS ROW ── -->
+                <HBox spacing="18">
+                    <VBox styleClass="stat-card, stat-card-green" HBox.hgrow="ALWAYS">
+                        <Label text="🌿" styleClass="stat-icon" />
+                        <Label fx:id="totalPlantsLabel" text="0" styleClass="stat-value" />
+                        <Label text="Total Plantes" styleClass="stat-label" />
+                    </VBox>
+                    <VBox styleClass="stat-card, stat-card-green" HBox.hgrow="ALWAYS">
+                        <Label text="✅" styleClass="stat-icon" />
+                        <Label fx:id="healthyPlantsLabel" text="0" styleClass="stat-value" />
+                        <Label text="Plantes Saines" styleClass="stat-label" />
+                    </VBox>
+                    <VBox styleClass="stat-card, stat-card-red" HBox.hgrow="ALWAYS">
+                        <Label text="⚠" styleClass="stat-icon" />
+                        <Label fx:id="alertsLabel" text="0" styleClass="stat-value" />
+                        <Label text="Alertes Actives" styleClass="stat-label" />
+                    </VBox>
+                    <VBox styleClass="stat-card, stat-card-blue" HBox.hgrow="ALWAYS">
+                        <Label text="👥" styleClass="stat-icon" />
+                        <Label fx:id="usersLabel" text="0" styleClass="stat-value" />
+                        <Label text="Utilisateurs" styleClass="stat-label" />
+                    </VBox>
+                    <VBox styleClass="stat-card, stat-card-amber" HBox.hgrow="ALWAYS">
+                        <Label text="💧" styleClass="stat-icon" />
+                        <Label fx:id="pendingLabel" text="0" styleClass="stat-value" />
+                        <Label text="Tâches en Attente" styleClass="stat-label" />
+                    </VBox>
+                </HBox>
+
+                <!-- ── CHARTS ROW ── -->
+                <HBox spacing="18">
+                    <!-- Pie Chart -->
+                    <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                        <Label text="Répartition des Plantes" styleClass="card-title" />
+                        <PieChart fx:id="statusPieChart" prefHeight="280"
+                                  legendVisible="true" labelsVisible="true" />
+                    </VBox>
+                    <!-- Bar Chart -->
+                    <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                        <Label text="Plantes par Utilisateur" styleClass="card-title" />
+                        <BarChart fx:id="userBarChart" prefHeight="280"
+                                  legendVisible="false">
+                            <xAxis><CategoryAxis label="Utilisateur" /></xAxis>
+                            <yAxis><NumberAxis label="Nombre" /></yAxis>
+                        </BarChart>
+                    </VBox>
+                </HBox>
+
+                <!-- ── RECENT ALERTS TABLE ── -->
+                <VBox styleClass="card">
+                    <Label text="Alertes Météo Récentes" styleClass="card-title" />
+                    <TableView fx:id="alertsTable" prefHeight="200">
+                        <columns>
+                            <TableColumn fx:id="colAlertType" text="Type" prefWidth="120" />
+                            <TableColumn fx:id="colSeverity" text="Sévérité" prefWidth="100" />
+                            <TableColumn fx:id="colMessage" text="Message" prefWidth="350" />
+                            <TableColumn fx:id="colDate" text="Date" prefWidth="110" />
+                            <TableColumn fx:id="colRegion" text="Région" prefWidth="120" />
+                        </columns>
+                    </TableView>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</HBox>

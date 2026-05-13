@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.ScheduleController"
+      stylesheets="@styles.css" prefWidth="1200" prefHeight="750">
+
+    <!-- ════ SIDEBAR ════ -->
+    <VBox styleClass="sidebar" spacing="0">
+        <Label text="🌿 ThinkGreen" styleClass="sidebar-brand" />
+        <Label text="Jardinage Urbain" styleClass="sidebar-tagline" />
+        <Region styleClass="sidebar-divider" />
+        <Label text="NAVIGATION" styleClass="nav-section-label" />
+        <Button text="📊  Tableau de Bord" styleClass="nav-btn" onAction="#goToDashboard" />
+        <Button text="🌱  Mes Plantes" styleClass="nav-btn" onAction="#goToPlants" />
+        <Button text="👥  Utilisateurs" styleClass="nav-btn" onAction="#goToUsers" />
+        <Button text="⛅  Météo / Alertes" styleClass="nav-btn" onAction="#goToWeather" />
+        <Button text="💧  Planning Arrosage" styleClass="nav-btn, nav-btn-active" onAction="#goToSchedule" />
+        <Region VBox.vgrow="ALWAYS" />
+        <Region styleClass="sidebar-divider" />
+        <Label fx:id="userInfoLabel" text="" styleClass="nav-section-label" />
+        <Button text="🚪  Déconnexion" styleClass="nav-btn, nav-btn-logout" onAction="#handleLogout" />
+        <Region prefHeight="15" />
+    </VBox>
+
+    <!-- ════ CONTENT ════ -->
+    <VBox styleClass="content-area" HBox.hgrow="ALWAYS">
+
+        <VBox styleClass="page-header">
+            <Label text="💧 Planning d'Arrosage et Entretien" styleClass="page-title" />
+            <Label text="Planifiez l'arrosage, la fertilisation et la taille de vos plantes" styleClass="page-subtitle" />
+        </VBox>
+
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
+            <VBox styleClass="page-body" spacing="20">
+
+                <!-- ── ADD FORM ── -->
+                <VBox styleClass="form-card" spacing="14">
+                    <Label text="➕ Nouvelle Tâche" styleClass="form-title" />
+
+                    <HBox spacing="14">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="PLANTE" styleClass="form-label" />
+                            <ComboBox fx:id="plantCombo" styleClass="combo-box" maxWidth="1.7976931348623157E308" />
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="ACTION" styleClass="form-label" />
+                            <ComboBox fx:id="actionCombo" styleClass="combo-box" maxWidth="1.7976931348623157E308" />
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="DATE PRÉVUE" styleClass="form-label" />
+                            <DatePicker fx:id="datePicker" styleClass="date-picker" maxWidth="1.7976931348623157E308" />
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="4">
+                        <Label text="NOTES" styleClass="form-label" />
+                        <TextField fx:id="notesField" styleClass="form-field" promptText="Notes optionnelles..." />
+                    </VBox>
+
+                    <HBox spacing="14" alignment="CENTER_LEFT">
+                        <Button text="Ajouter la Tâche" styleClass="btn-primary" onAction="#handleAddSchedule" />
+                        <Label fx:id="formMessage" text="" styleClass="error-label" />
+                    </HBox>
+                </VBox>
+
+                <!-- ── FILTER + TABLE ── -->
+                <HBox spacing="14" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="showPendingOnly" text="Afficher seulement les tâches en attente"
+                              onAction="#handleFilterToggle" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="countLabel" text="0 tâches" styleClass="stat-label" />
+                </HBox>
+
+                <TableView fx:id="scheduleTable" prefHeight="380">
+                    <columns>
+                        <TableColumn fx:id="colPlant" text="Plante" prefWidth="150" />
+                        <TableColumn fx:id="colAction" text="Action" prefWidth="130" />
+                        <TableColumn fx:id="colDate" text="Date Prévue" prefWidth="120" />
+                        <TableColumn fx:id="colCompleted" text="Statut" prefWidth="130" />
+                        <TableColumn fx:id="colNotes" text="Notes" prefWidth="220" />
+                        <TableColumn fx:id="colActions" text="Actions" prefWidth="100" />
+                    </columns>
+                </TableView>
+
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</HBox>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.WeatherController"
+      stylesheets="@styles.css" prefWidth="1200" prefHeight="750">
+
+    <!-- ════ SIDEBAR ════ -->
+    <VBox styleClass="sidebar" spacing="0">
+        <Label text="🌿 ThinkGreen" styleClass="sidebar-brand" />
+        <Label text="Jardinage Urbain" styleClass="sidebar-tagline" />
+        <Region styleClass="sidebar-divider" />
+        <Label text="NAVIGATION" styleClass="nav-section-label" />
+        <Button text="📊  Tableau de Bord" styleClass="nav-btn" onAction="#goToDashboard" />
+        <Button text="🌱  Mes Plantes" styleClass="nav-btn" onAction="#goToPlants" />
+        <Button text="👥  Utilisateurs" styleClass="nav-btn" onAction="#goToUsers" />
+        <Button text="⛅  Météo / Alertes" styleClass="nav-btn, nav-btn-active" onAction="#goToWeather" />
+        <Button text="💧  Planning Arrosage" styleClass="nav-btn" onAction="#goToSchedule" />
+        <Region VBox.vgrow="ALWAYS" />
+        <Region styleClass="sidebar-divider" />
+        <Label fx:id="userInfoLabel" text="" styleClass="nav-section-label" />
+        <Button text="🚪  Déconnexion" styleClass="nav-btn, nav-btn-logout" onAction="#handleLogout" />
+        <Region prefHeight="15" />
+    </VBox>
+
+    <!-- ════ CONTENT ════ -->
+    <VBox styleClass="content-area" HBox.hgrow="ALWAYS">
+
+        <VBox styleClass="page-header">
+            <Label text="⛅ Alertes Météo" styleClass="page-title" />
+            <Label text="Surveillez les conditions climatiques pour protéger vos plantes" styleClass="page-subtitle" />
+        </VBox>
+
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
+            <VBox styleClass="page-body" spacing="20">
+
+                <!-- ── ADD ALERT FORM ── -->
+                <VBox styleClass="form-card" spacing="14">
+                    <Label text="➕ Nouvelle Alerte Météo" styleClass="form-title" />
+
+                    <HBox spacing="14">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="TYPE D'ALERTE" styleClass="form-label" />
+                            <ComboBox fx:id="typeCombo" styleClass="combo-box" maxWidth="1.7976931348623157E308" />
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="SÉVÉRITÉ" styleClass="form-label" />
+                            <ComboBox fx:id="severityCombo" styleClass="combo-box" maxWidth="1.7976931348623157E308" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="14">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="RÉGION" styleClass="form-label" />
+                            <TextField fx:id="regionField" styleClass="form-field" promptText="Ville ou région" />
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="DATE" styleClass="form-label" />
+                            <DatePicker fx:id="datePicker" styleClass="date-picker" maxWidth="1.7976931348623157E308" />
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="4">
+                        <Label text="MESSAGE" styleClass="form-label" />
+                        <TextArea fx:id="messageArea" styleClass="text-area" promptText="Décrivez l'alerte..."
+                                  prefRowCount="2" wrapText="true" />
+                    </VBox>
+
+                    <HBox spacing="14" alignment="CENTER_LEFT">
+                        <Button text="Publier l'Alerte" styleClass="btn-primary" onAction="#handleAddAlert" />
+                        <Label fx:id="formMessage" text="" styleClass="error-label" />
+                    </HBox>
+                </VBox>
+
+                <!-- ── ALERTS GRID ── -->
+                <Label fx:id="alertCountLabel" text="0 alertes actives" styleClass="card-title" />
+                <FlowPane fx:id="alertsGrid" hgap="16" vgap="16" />
+
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</HBox>

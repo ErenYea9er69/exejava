@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="ui.RegisterController"
+           styleClass="login-root" stylesheets="@styles.css"
+           prefWidth="900" prefHeight="680">
+
+    <!-- Register Card -->
+    <VBox styleClass="login-card" alignment="CENTER" spacing="4"
+          StackPane.alignment="CENTER">
+
+        <!-- Leaf Icon -->
+        <Label text="🌱" styleClass="login-leaf-icon" />
+
+        <!-- Title -->
+        <Label text="Rejoignez ThinkGreen" styleClass="login-title" />
+        <Label text="Créez votre compte jardinier" styleClass="login-subtitle" />
+
+        <!-- Username -->
+        <VBox spacing="4">
+            <padding><Insets top="4"/></padding>
+            <Label text="NOM D'UTILISATEUR" styleClass="form-label" />
+            <TextField fx:id="usernameField" styleClass="form-field"
+                       promptText="Choisissez un nom d'utilisateur" />
+        </VBox>
+
+        <!-- Email -->
+        <VBox spacing="4">
+            <padding><Insets top="8"/></padding>
+            <Label text="EMAIL" styleClass="form-label" />
+            <TextField fx:id="emailField" styleClass="form-field"
+                       promptText="votre@email.com" />
+        </VBox>
+
+        <!-- Password -->
+        <VBox spacing="4">
+            <padding><Insets top="8"/></padding>
+            <Label text="MOT DE PASSE" styleClass="form-label" />
+            <PasswordField fx:id="passwordField" styleClass="form-field"
+                           promptText="Minimum 4 caractères" />
+        </VBox>
+
+        <!-- Confirm Password -->
+        <VBox spacing="4">
+            <padding><Insets top="8"/></padding>
+            <Label text="CONFIRMER LE MOT DE PASSE" styleClass="form-label" />
+            <PasswordField fx:id="confirmPasswordField" styleClass="form-field"
+                           promptText="Retapez votre mot de passe" />
+        </VBox>
+
+        <!-- Message Label -->
+        <Label fx:id="messageLabel" styleClass="error-label" text="" />
+
+        <!-- Buttons -->
+        <VBox spacing="12" alignment="CENTER">
+            <padding><Insets top="16"/></padding>
+            <Button text="Créer Mon Compte" styleClass="btn-primary"
+                    onAction="#handleRegister" maxWidth="1.7976931348623157E308" />
+            <Button text="Déjà un compte ? Se connecter" styleClass="btn-link"
+                    onAction="#goToLogin" />
+        </VBox>
+    </VBox>
+</StackPane>

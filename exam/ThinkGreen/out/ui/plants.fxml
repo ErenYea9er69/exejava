@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="ui.PlantController"
+      stylesheets="@styles.css" prefWidth="1200" prefHeight="750">
+
+    <!-- ════ SIDEBAR ════ -->
+    <VBox styleClass="sidebar" spacing="0">
+        <Label text="🌿 ThinkGreen" styleClass="sidebar-brand" />
+        <Label text="Jardinage Urbain" styleClass="sidebar-tagline" />
+        <Region styleClass="sidebar-divider" />
+        <Label text="NAVIGATION" styleClass="nav-section-label" />
+        <Button text="📊  Tableau de Bord" styleClass="nav-btn" onAction="#goToDashboard" />
+        <Button text="🌱  Mes Plantes" styleClass="nav-btn, nav-btn-active" onAction="#goToPlants" />
+        <Button text="👥  Utilisateurs" styleClass="nav-btn" onAction="#goToUsers" />
+        <Button text="⛅  Météo / Alertes" styleClass="nav-btn" onAction="#goToWeather" />
+        <Button text="💧  Planning Arrosage" styleClass="nav-btn" onAction="#goToSchedule" />
+        <Region VBox.vgrow="ALWAYS" />
+        <Region styleClass="sidebar-divider" />
+        <Label fx:id="userInfoLabel" text="" styleClass="nav-section-label" />
+        <Button text="🚪  Déconnexion" styleClass="nav-btn, nav-btn-logout" onAction="#handleLogout" />
+        <Region prefHeight="15" />
+    </VBox>
+
+    <!-- ════ CONTENT ════ -->
+    <VBox styleClass="content-area" HBox.hgrow="ALWAYS">
+
+        <!-- Header -->
+        <VBox styleClass="page-header">
+            <Label text="🌱 Gestion des Plantes" styleClass="page-title" />
+            <Label text="Ajoutez, modifiez et suivez vos plantes" styleClass="page-subtitle" />
+        </VBox>
+
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
+            <VBox styleClass="page-body" spacing="20">
+
+                <!-- ── ADD/EDIT FORM ── -->
+                <VBox styleClass="form-card" spacing="14">
+                    <Label fx:id="formTitle" text="➕ Ajouter une Plante" styleClass="form-title" />
+
+                    <HBox spacing="14">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="NOM" styleClass="form-label" />
+                            <TextField fx:id="nameField" styleClass="form-field" promptText="Nom de la plante" />
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="ESPÈCE" styleClass="form-label" />
+                            <TextField fx:id="speciesField" styleClass="form-field" promptText="Espèce botanique" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="14">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="EMPLACEMENT" styleClass="form-label" />
+                            <TextField fx:id="locationField" styleClass="form-field" promptText="Jardin / Zone" />
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="DATE DE PLANTATION" styleClass="form-label" />
+                            <DatePicker fx:id="datePicker" styleClass="date-picker" maxWidth="1.7976931348623157E308" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="14" alignment="CENTER_LEFT">
+                        <VBox spacing="4">
+                            <Label text="STATUT" styleClass="form-label" />
+                            <ComboBox fx:id="statusCombo" styleClass="combo-box" prefWidth="200" />
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="submitBtn" text="Ajouter" styleClass="btn-primary" onAction="#handleSubmit" />
+                        <Button fx:id="cancelBtn" text="Annuler" styleClass="btn-secondary" onAction="#handleCancel" visible="false" />
+                    </HBox>
+
+                    <Label fx:id="formMessage" text="" styleClass="error-label" />
+                </VBox>
+
+                <!-- ── SEARCH + TABLE ── -->
+                <HBox spacing="14" alignment="CENTER_LEFT">
+                    <TextField fx:id="searchField" styleClass="search-field" promptText="🔍 Rechercher par nom ou espèce..." />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="countLabel" text="0 plantes" styleClass="stat-label" />
+                </HBox>
+
+                <TableView fx:id="plantsTable" VBox.vgrow="ALWAYS" prefHeight="350">
+                    <columns>
+                        <TableColumn fx:id="colName" text="Nom" prefWidth="140" />
+                        <TableColumn fx:id="colSpecies" text="Espèce" prefWidth="160" />
+                        <TableColumn fx:id="colLocation" text="Emplacement" prefWidth="130" />
+                        <TableColumn fx:id="colDate" text="Planté le" prefWidth="110" />
+                        <TableColumn fx:id="colStatus" text="Statut" prefWidth="120" />
+                        <TableColumn fx:id="colActions" text="Actions" prefWidth="160" />
+                    </columns>
+                </TableView>
+
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</HBox>
